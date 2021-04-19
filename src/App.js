@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Form from './components/Form';
+import List from './components/List';
 
 function App() {
+  const [list, setList] = useState([]);
+
+  function add(value) {
+    const newEl = {
+      id: Math.random().toString(),
+      text: value
+    };
+    setList([...list, newEl]);
+  }
+
+  function del(index) {
+    list.splice(index, 1);
+    setList([...list]);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+        <h3>Список делов</h3>
+        <Form handleSubmit={value => add(value)} />
+        <List list={list} deleteHandler={index => del(index)} />
+      </>
   );
 }
 
 export default App;
+
