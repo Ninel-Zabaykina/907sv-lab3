@@ -2,14 +2,44 @@ import React, { useState } from 'react';
 import './App.css';
 import Form from './components/Form';
 import List from './components/List';
+import reducer, { ACTION_TYPES, filteredList } from './Store';
 
 function App() {
   const [list, setList] = useState([]);
+  const [mark, setMark] = useState(false);
 
-  function add(value) {
+    function dispatch(action) {
+        const newList = reducer(action, list);
+        setList(newList);
+    }
+
+    return (
+        <>
+            <Form
+                handleSubmit={value =>
+                    dispatch({
+                        type: ACTION_TYPES.ADD,
+                        payload: value
+                    })
+                }
+            />
+            <div>
+                <label>
+                    Выполненные:
+                    <input checked={mark} onChange={() => setMark(!mark)} type="checkbox" />
+                </label>
+            </div>
+            <List list={filteredList({ list, mark })} dispatch={dispatch} />
+        </>
+    );
+}
+export default App; 
+
+  /*function add(value) {
     const newEl = {
       id: Math.random().toString(),
-      text: value
+      text: value,
+      isChecked: false
     };
     setList([...list, newEl]);
   }
@@ -26,7 +56,6 @@ function App() {
         <List list={list} deleteHandler={index => del(index)} />
       </>
   );
-}
+}*/
 
-export default App;
 
