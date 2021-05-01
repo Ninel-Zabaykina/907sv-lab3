@@ -4,6 +4,7 @@ import Form from './components/Form';
 import List from './components/List';
 import reducer, { ACTION_TYPES, filteredList } from './Store';
 
+
 function App() {
   const [list, setList] = useState([]);
   const [mark, setMark] = useState(false);
@@ -15,6 +16,10 @@ function App() {
 
     return (
         <>
+            <div>
+                <h1>Список делов</h1>
+                <h2>Лабораторная №3. Список с фильтрацией</h2>
+            </div>
             <Form
                 handleSubmit={value =>
                     dispatch({
@@ -22,10 +27,11 @@ function App() {
                         payload: value
                     })
                 }
+
             />
             <div>
                 <label>
-                    Выполненные:
+                    Done:
                     <input checked={mark} onChange={() => setMark(!mark)} type="checkbox" />
                 </label>
             </div>
@@ -56,6 +62,10 @@ export default App;
         <List list={list} deleteHandler={index => del(index)} />
       </>
   );
+
+
+
+              /*<List list={filteredList({ list, mark })} dispatch={dispatch} />
 }*/
 
 
