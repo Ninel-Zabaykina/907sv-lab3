@@ -12,7 +12,7 @@ test('ListItem displays content and reacts to the button', () => {
   const dispatch = jest.fn();
 
   render(<ListItem text={text} id={id} dispatch={dispatch} />);
-  const submitButton = screen.queryByText('submit')
+  const submitButton = screen.queryByText(text)
   expect(submitButton).toBeNull() // it doesn't exist
 
   const button = screen.getByTestId('delete_button');

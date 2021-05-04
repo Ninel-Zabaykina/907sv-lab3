@@ -23,16 +23,8 @@ const list = [
 
 test('correctly displays an empty array', () => {
   const dispatch = jest.fn();
-  render(<List list={list} dispatch={dispatch} />);
-  for (let listItem of list) {
-    const submitButton = screen.queryByText('submit')
-    expect(submitButton).toBeNull() // it doesn't exist
-    /*expect(screen.queryByText(listItem.title)).toBeInTheDocument();*/
-  }
-  for (let button of screen.getAllByTestId('delete_button')) {
-    fireEvent.click(button);
-  }
-  expect(dispatch).toBeCalledTimes(list.length);
+  render(<List list={[]} dispatch={dispatch} />);
+  expect(screen.getByText('List is empty')).toBeInTheDocument();
 });
 
 test('correctly displays checkbox elements', () => {
