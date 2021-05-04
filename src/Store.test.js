@@ -24,13 +24,14 @@ describe('Check  Store.js', () => {
 
         let list = reducer(addAction, []);
 
-        const removeAction = {
-            type: ACTION_TYPES.REMOVE,
+        const delAction = {
+            type: ACTION_TYPES.DELETE,
             payload: list[0].id
         };
 
-        list = reducer(removeAction, list);
-        expect(list.length).toEqual(1);
+        list = reducer(delAction, list);
+
+        expect(list.length).toEqual(0);
     });
 
     test('Check checked function', () => {
@@ -67,5 +68,21 @@ describe('Check  Store.js', () => {
         const filList = filteredList({ list: list, mark: true });
         expect(filList.length).toEqual(1);
         expect(filList[0].id).toEqual(list[1].id);
+    });
+
+    test ('Check edit function', () => {
+        const addAction = {
+            type: ACTION_TYPES.ADD,
+            payload: title
+        };
+
+        let list = reducer(addAction, []);
+        const editAction = {
+            type: ACTION_TYPES.EDIT,
+            payload: title
+        };
+
+        list = reducer(editAction, list);
+        expect(list[1]).not.toBe(title);
     });
 });
