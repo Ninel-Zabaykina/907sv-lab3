@@ -1,5 +1,5 @@
 import reducer, { ACTION_TYPES, filteredList } from './store';
-import ListItem from "./components/ListItem";
+import ListItem from './components/ListItem';
 
 const title = 'ListItem';
 
@@ -68,21 +68,5 @@ describe('Check  Store.js', () => {
         const filList = filteredList({ list: list, mark: true });
         expect(filList.length).toEqual(1);
         expect(filList[0].id).toEqual(list[1].id);
-    });
-
-    test ('Check edit function', () => {
-        const addAction = {
-            type: ACTION_TYPES.ADD,
-            payload: title
-        };
-
-        let list = reducer(addAction, []);
-        const editAction = {
-            type: ACTION_TYPES.EDIT,
-            payload: title
-        };
-
-        list = reducer(editAction, list);
-        expect(list[1]).not.toBe(title);
     });
 });

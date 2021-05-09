@@ -5,13 +5,14 @@ export default function Form({ handleSubmit }) {
 
   function handleSubmitInner(e) {
     e.preventDefault();
+    if (value === '') return;
     handleSubmit(value);
     setValue('');
   }
   return (
-    <form data-testid="form" onSubmit={handleSubmitInner}>
-      <input data-testid="input" value={value} onChange={e => setValue(e.target.value)} />
-      <button type="submit">Save</button>
-    </form>
+      <form data-testid="form" onSubmit={handleSubmitInner}>
+        <input data-testid="input" value={value} onChange={e => setValue(e.target.value)} />
+        <button type="submit">Save</button>
+      </form>
   );
 }
