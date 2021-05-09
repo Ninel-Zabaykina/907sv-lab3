@@ -35,7 +35,7 @@ export default function reducer(action, prevState = initialState) {
             ];
         }
         case ACTION_TYPES.FILTER: {
-            return { ...prevState, isFiltered: !filteredList().isFiltered };
+            return { ...prevState, isChecked: !filteredList().isChecked };
         }
         default:
             return [...prevState];
@@ -43,7 +43,7 @@ export default function reducer(action, prevState = initialState) {
 }
 
 export function filteredList({ list, mark }) {
-    if (!mark) return list;
+   if (!mark) return list;
 
     return list.filter(list => list.isChecked);
 }
